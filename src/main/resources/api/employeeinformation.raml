@@ -1,0 +1,49 @@
+#%RAML 1.0
+title: EmployeeInformation
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/d1cccf40-51cf-43be-adcb-fd4e1ebc45a5
+
+securitySchemes:
+  basic:
+    description: This API supports Basic Authentication using API Manager client/secret.
+    type: Basic Authentication 
+
+types:
+  emp: !include Schemas/EmployeeRecords.raml
+/Employee:
+  get:
+    queryParameters:
+      ID:
+        type: integer
+    responses:
+      200:
+        body:
+          application/json:
+            example: emp
+/EmployeeRecords:
+  post:
+    queryParameters:
+      Name:
+        type: string
+        required: false
+        minLength: 5
+        maxLength: 10
+    body:
+      application/json:
+        type: !include Schemas/EmployeeRecords.raml
+       
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              {"Result":"Employee record created"}
+/EmployeeDetails:
+  put:
+    body:
+      application/json:
+        type: emp
+        
+          
+          
+      
+    
